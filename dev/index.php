@@ -1,27 +1,11 @@
 <?php
 
-// TODO: Database benaderen en product info opvragen
-$dbHost = '127.0.0.1';
-$dbName = '2324_wittekip';
-$dbUser = 'root';
-$dbPassword = 'root';
-
-$dbConnection = null;
-$dbStatement = null;
+require_once './src/Database/Database.php';
 
 $products = [];
 
-try {
-    // Connectie maken
-    $dbConnection = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPassword);
-
-    $dbStatement = $dbConnection->prepare("SELECT * FROM `products`");
-    $dbStatement->execute();
-
-    $products = $dbStatement->fetchAll(PDO::FETCH_ASSOC);
-} catch(PDOException $e) {
-    echo 'Error: ' . $e->getMessage();
-}
+Database::query("SELECT * FROM products");
+$products = Database::getAll();
 
 // Head.inc.php binnenhalen
 require_once './templates/head.inc.php';
@@ -61,7 +45,8 @@ require_once './templates/head.inc.php';
                          product in de database -->
                     <?php foreach ($products as $product) : ?>
                     <!-- PRODUCT KAART -->
-                    <a class="product-card uk-card uk-card-home uk-card-default uk-card-small uk-card-hover" href="product.html">
+                    <a class="product-card uk-card uk-card-home uk-card-default uk-card-small uk-card-hover"
+                       href="product.php?product_id=<?= $product['id'] ?>">
                         <div class="uk-card-media-top uk-align-center">
                             <img
                                 src="<?= $product["image"] ?>"
