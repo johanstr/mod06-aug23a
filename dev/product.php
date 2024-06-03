@@ -19,6 +19,7 @@ $placeholders = ['id' => $product_id];
 Database::query($sql, $placeholders);
 $product = Database::get();
 
+
 require_once './templates/head.inc.php';
 ?>
 
