@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once './src/Database/Database.php';
 
@@ -6,6 +7,11 @@ $products = [];
 
 Database::query("SELECT * FROM products");
 $products = Database::getAll();
+
+echo '<pre>';
+print_r($_SESSION['customer']);
+echo '</pre>';
+die();
 
 // Head.inc.php binnenhalen
 require_once './templates/head.inc.php';
