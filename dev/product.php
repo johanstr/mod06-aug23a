@@ -1,4 +1,5 @@
 <?php
+require_once './src/auth/helper.php';
 
 if(!isset($_GET['product_id'])) {
    header('location: index.php');

@@ -1,4 +1,9 @@
 <?php
+require_once './src/auth/helper.php';
+if(isLoggedIn()) {
+    header('./index.php');
+    exit();
+}
 require_once './templates/head.inc.php';
 ?>
 

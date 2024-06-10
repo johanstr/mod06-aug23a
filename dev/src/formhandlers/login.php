@@ -29,6 +29,7 @@ if(! password_verify($password, $customer['password'])) {
 // STAP 5 - Vastleggen Customer gegevens voor andere (sub)programma's
 $_SESSION['customer'] = $customer;
 unset($_SESSION['customer']['password']);
+$_SESSION['messages']['login_success'] = "U bent succesvol ingelogd.";
 //[] = [
 //   'firstname' => $customer['firstname'],
 //   'prefixes' => $customer['prefixes'],

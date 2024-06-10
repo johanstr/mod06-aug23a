@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+require_once 'src/auth/helper.php';
 
 require_once './src/Database/Database.php';
 
@@ -8,21 +9,18 @@ $products = [];
 Database::query("SELECT * FROM products");
 $products = Database::getAll();
 
-echo '<pre>';
-print_r($_SESSION['customer']);
-echo '</pre>';
-die();
-
 // Head.inc.php binnenhalen
 require_once './templates/head.inc.php';
 ?>
 
 <!-- Pagina specifieke HTML code hier plaatsen -->
     <main class="uk-container uk-padding">
-<!--        <div class="uk-alert-success" uk-alert>-->
-<!--            <a href class="uk-alert-close" uk-close></a>-->
-<!--            <p>Hier tonen we o.a. of het inloggen succesvol was.</p>-->
-<!--        </div>-->
+        <?php if(hasMessage('login_success')): ?>
+        <div class="uk-alert-success" uk-alert>
+            <a href class="uk-alert-close" uk-close></a>
+            <p><?= getMessage('login_success') ?></p>
+        </div>
+        <?php endif; ?>
         <div class="uk-grid">
             <section class="uk-width-1-5">
                 <h4>Categoriën</h4>
